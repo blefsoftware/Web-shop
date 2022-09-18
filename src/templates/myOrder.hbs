@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>My order</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="/">IP WebShop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbarTop">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbarTop">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="btn btn-outline-light mr-sm-2" href="/">Home</a>
+            </li>
+            {{#if currentUser}}
+                {{#each currentUser}}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light mr-sm-2" href="/userPanel/{{this.uid}}">User panel</a>
+                        <input id="user" value="{{this.uid}}" hidden>
+                    </li>
+                {{/each}}
+            {{/if}}
+        </ul>
+    </div>
+</nav>
+<div class="container" style="margin-top:100px">
+    {{#if orderPaid}}
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{orderPaid}}</strong>
+        </div>
+    {{/if}}
+    <div id="contentDiv">
+        {{#if myOrders}}
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>OID</th>
+                    <th>Username</th>
+                    <th>Quantity</th>
+                    <th class="text-center">Products</th>
+                    <th>Cost</th>
+                    <th>Paid</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each myOrders}}
+                    <tr>
+                        <td>{{this.oid}}</td>
+                        <td>{{this.user.username}}</td>
+                        <td>{{this.quantity}}</td>
+                        <td>{{this.products}}</td>
+                        <td>&euro;{{this.cost}}</td>
+                        <td>{{this.paid}}</td>
+                        <td>
+                            <form action="/orders/pay/{{this.oid}}" method="post">
+                                <button class="btn btn-outline-success btn-block" type="submit">Send payment</button>
+                            </form>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+    </div>
+</div>
+<script src="http://127.0.0.1:5000/js/payment.js"></script>
+</body>
+</html>

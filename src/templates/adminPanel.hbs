@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Admin Panel</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="/">IP WebShop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbarTop">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbarTop">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="btn btn-outline-light mr-sm-2" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-light mr-sm-2" href="/adminPanel/products">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-light mr-sm-2" href="/adminPanel/categories">Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-light mr-sm-2" href="/adminPanel/users">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-light mr-sm-2" href="/adminPanel/orders">Orders</a>
+            </li>
+            {{#if userStatus}}
+                <li class="nav-item">
+                    <a class="btn btn-outline-light mr-sm-2" href="/logout">Logout [{{#if welcomeUser}}{{welcomeUser}}
+                        - {{userStatus}}{{/if}}]</a>
+                </li>
+            {{/if}}
+        </ul>
+    </div>
+</nav>
+<div class="container" style="margin-top:70px">
+    {{#if totalUsers}}
+        <div class="alert alert-info">
+            <strong>{{totalUsers}}</strong>
+        </div>
+    {{/if}}
+    {{#if totalProducts}}
+        <div class="alert alert-info">
+            <strong>{{totalProducts}}</strong>
+        </div>
+    {{/if}}
+    {{#if totalCategories}}
+        <div class="alert alert-info">
+            <strong>{{totalCategories}}</strong>
+        </div>
+    {{/if}}
+    {{#if totalOrders}}
+        <div class="alert alert-info">
+            <strong>{{totalOrders}}</strong>
+        </div>
+    {{/if}}
+</div>
+</body>
+</html>
